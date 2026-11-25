@@ -2,19 +2,24 @@ import argparse
 import os
 import shutil
 import subprocess
+import sys
 import cv2
 import numpy as np
 import pandas as pd
 import torch
 from ultralytics import YOLO
 
-from geometry import (
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+from geometry.geometry import (
     compute_metric_dimensions,
     compute_severity_score,
     estimate_gps_point,
     is_vehicle_hazard,
 )
-from analytics import generate_analytics_charts
+from analytics.analytics import generate_analytics_charts
 
 VEHICLE_CLASSES = [2, 5, 7]
 COLS = [
